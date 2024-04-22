@@ -1,9 +1,16 @@
 from flask import Flask, render_template, request, redirect, url_for
+from sqlalchemy import *
 
 app = Flask(__name__)
+conn_str = "mysql://root:1234@localhost/sfcu"
+engine = create_engine(conn_str, echo=True)
+conn = engine.connect()
+
 
 users = {}
-
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('home.html')
 # Route for user registration
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -25,7 +32,7 @@ def login():
             return redirect(url_for('dashboard', username=username))
         else:
             return "Invalid username or password"
-    return render_template('login.html')
+    return render_template('user.html')
 
 # Route for user dashboard
 @app.route('/dashboard/<username>')

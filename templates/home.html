@@ -1,0 +1,85 @@
+ <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            min-height: 100vh
+        }
+        header {
+            background-color: #3498db; /* Change this to your desired header color */
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+        }
+        .bar {
+            display: inline-block;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .bar li {
+            display: inline-block;
+            margin-left: 20px;
+        }
+        .bar li:first-child {
+            margin-left: 0;
+        }
+        .bar li a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .bar li a:hover {
+            background-color: #2980b9;
+        }
+        h1 {
+            margin: 10;
+            font-size: 24px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: auto;
+            width: 100%;
+            bottom: 0;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SFCU</title>
+</head>
+<body>
+    <header>
+        <div>
+            <ul class="bar">
+                <li><a href="/">HOME</a></li>
+                <li><a href="/dashboard">DASHBOARD</a></li>
+                <li><a href="/login">LOGIN</a></li>
+                <li><a href="/register">REGISTER</a></li>
+            </ul>
+            <h1>STEVENS FEDERAL CREDIT UNION</h1>
+        </div>
+    </header>
+    {% block body %}
+    {% endblock %}
+    <footer>
+        <div class="foot">
+            <div class="footer-content">
+                <p>&copy; 2024 Stevens Federal Credit Union. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
