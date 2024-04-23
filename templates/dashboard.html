@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <a href="/statement">View Bank Statement</a>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Sender/Description</th>
+            <th>Recipient</th>
+            <th>Amount</th>
+            <th>Type</th>
+        </tr>
+        {% for transaction in transactions %}
+        <tr>
+            <td>{{ transaction.date }}</td>
+            <td>{{ transaction.sender }}</td>
+            <td>{{ transaction.recipient }}</td>
+            <td>{{ transaction.amount }}</td>
+            <td>{{ transaction.type }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

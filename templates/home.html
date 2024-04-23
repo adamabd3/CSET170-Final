@@ -16,6 +16,10 @@
             padding: 20px 0;
             text-align: center;
         }
+        img:hover {
+            transform: translateY(-20px);
+            cursor: pointer;
+        }
         .bar {
             display: flex;
             justify-content: center;
@@ -40,9 +44,24 @@
             background-image: linear-gradient(to bottom, #00008b, #003366);
             color: #fff;
             padding: 40px 20px;
-            text-align: left;
             line-height: 1;
+            text-align: left;
+            display: flex;
         }
+        .headline h2{
+            font-size: 30px
+        }
+        .headline h3{
+            font-size: 25px;
+        }
+        .right {
+            align-items: right;
+            width: 50%;
+            padding-top: 30px;
+        }
+        .left {
+            width: 50%;
+         }
         .products {
             background-color: #fff;
             padding: 40px 20px;
@@ -55,7 +74,7 @@
         }
         .products p {
             font-size: 16px;
-            color: #666;
+            color: #665;
             margin-bottom: 40px;
         }
         .products ul {
@@ -105,24 +124,29 @@
     {% block content %}{% endblock %}
 
     <div class="headline">
-        <h3>Welcome to</h3>
-        <h2>Stevens Federal Credit Union</h2>
+        <div class="left">
+            <h3>Welcome to</h3>
+            <h2>Stevens Federal Credit Union</h2>
+        </div>
+        <div class="right">
+            <p>You are eligible to join SFCU if you live, work, worship or attend school in<br> Lancaster. You are also eligible to join if you have an immediate family<br> member who lives, works, worships or attends school in Lancaster</p>
+        </div>
     </div>
 
     <div class="products">
-        <h3>Products tailored for you</h3>
-        <p>Stevens Federal Credit Union offers products and services for every stage of life.</p>
+            <h3>Products tailored for you</h3>
+            <p>Stevens Federal Credit Union offers products and services for every stage of life.</p>
         <ul>
             <li>
-                <img src="home.jpg" alt="home">
+                <img src="{{ url_for('static',filename='house.png') }}" alt='house'>
                 <p>Buy A HOME</p>
             </li>
             <li>
-                <img src="car.jpg" alt="car">
+                <img src="{{ url_for('static',filename='car.png') }}" alt='car'>
                 <p>GET A CAR</p>
             </li>
             <li>
-                <img src="retirement.jpg" alt="save">
+                <img src="{{ url_for('static',filename='save.png') }}" alt='save'>
                 <p>PLAN FOR RETIREMENT</p>
             </li>
         </ul>

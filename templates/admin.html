@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    .flex-box {
+        display: flex;
+        font-size: 16px;
+        flex-wrap: wrap;
+        width: 1140px;
+        margin: auto;
+    }
+</style>
+    <div class="flex-box">
+        <h3>Pending Accounts</h3>
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>SSN</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Action</th>
+            </tr>
+            {% for users in pending_accounts %}
+            <tr>
+                <td>{{ users.username }}</td>
+                <td>{{ users.firstname }}</td>
+                <td>{{ users.lastname }}</td>
+                <td>{{ users.ssn }}</td>
+                <td>{{ users.address }}</td>
+                <td>{{ users.phonenumber }}</td>
+                <td><a href="/admin/accept/{{ users.username }}">Accept</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+</html>
+{% endblock %}
