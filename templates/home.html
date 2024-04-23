@@ -1,17 +1,24 @@
- <style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stevens Federal Credit Union</title>
+    <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            min-height: 100vh
+            min-height: 100vh;
+            padding: 0;
+            background-color: #f2f2f2;
         }
         header {
-            background-color: #3498db; /* Change this to your desired header color */
+            background-color: #3498db;
             color: #fff;
-            padding: 15px 0;
+            padding: 15px;
             text-align: center;
         }
         .bar {
-            display: inline-block;
             list-style-type: none;
             padding: 0;
             margin: 0;
@@ -33,53 +40,98 @@
         .bar li a:hover {
             background-color: #2980b9;
         }
-        h1 {
-            margin: 10;
+        .headline {
+            background-color: #00008b;
+            color: #fff;
+            padding: 20px;
+            text-align: left;
+            line-height: 0;
+        }
+        .products {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .products h3 {
             font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .products p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .products ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .products li {
+            flex: 1;
+            margin: 0 10px;
         }
         footer {
             background-color: #333;
             color: #fff;
             padding: 20px 0;
             text-align: center;
-            margin-top: auto;
-            width: 100%;
-            bottom: 0;
         }
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        }
+        .footer-content p {
+            margin: 0;
         }
     </style>
- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>SFCU</title>
 </head>
 <body>
     <header>
+        {% block body %}
         <div>
+            <h1>Stevens Federal Credit Union</h1>
             <ul class="bar">
                 <li><a href="/">HOME</a></li>
                 <li><a href="/dashboard">DASHBOARD</a></li>
                 <li><a href="/login">LOGIN</a></li>
                 <li><a href="/register">REGISTER</a></li>
             </ul>
-            <h1>STEVENS FEDERAL CREDIT UNION</h1>
         </div>
     </header>
-    {% block body %}
-    {% endblock %}
+        {% endblock %}
+
+    <div class="headline">
+        <h3>Welcome to</h3>
+        <h2>Stevens Federal Credit Union</h2>
+    </div>
+
+    <div class="products">
+        <h3>Products tailored for you</h3>
+        <p>Stevens Federal Credit Union offers products and services for every stage of life.</p>
+        <ul>
+            <li>
+                <img src="home.jpg" alt="home">
+                <p>Buy A HOME</p>
+            </li>
+            <li>
+                <img src="car.jpg" alt="car">
+                <p>GET A CAR</p>
+            </li>
+            <li>
+                <img src="retirement.jpg" alt="save">
+                <p>PLAN FOR RETIREMENT</p>
+            </li>
+        </ul>
+    </div>
+
     <footer>
-        <div class="foot">
-            <div class="footer-content">
-                <p>&copy; 2024 Stevens Federal Credit Union. All rights reserved.</p>
-            </div>
+        <div class="footer-content">
+            <p>&copy; 2024 Stevens Federal Credit Union. All rights reserved.</p>
         </div>
     </footer>
 </body>
 </html>
+
