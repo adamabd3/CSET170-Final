@@ -8,27 +8,22 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            min-height: 100vh;
-            padding: 0;
             background-color: #f2f2f2;
         }
         header {
             background-color: #3498db;
             color: #fff;
-            padding: 15px;
+            padding: 20px 0;
             text-align: center;
         }
         .bar {
+            display: flex;
+            justify-content: center;
             list-style-type: none;
             padding: 0;
-            margin: 0;
         }
         .bar li {
-            display: inline-block;
-            margin-left: 20px;
-        }
-        .bar li:first-child {
-            margin-left: 0;
+            margin: 0 10px;
         }
         .bar li a {
             text-decoration: none;
@@ -42,24 +37,26 @@
         }
         .headline {
             background-color: #00008b;
+            background-image: linear-gradient(to bottom, #00008b, #003366);
             color: #fff;
-            padding: 20px;
+            padding: 40px 20px;
             text-align: left;
-            line-height: 0;
+            line-height: 1;
         }
         .products {
             background-color: #fff;
-            padding: 20px;
+            padding: 40px 20px;
             text-align: center;
+            height: 400px;
         }
         .products h3 {
             font-size: 24px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
         .products p {
             font-size: 16px;
             color: #666;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
         .products ul {
             list-style-type: none;
@@ -71,7 +68,14 @@
         }
         .products li {
             flex: 1;
-            margin: 0 10px;
+            margin: 0 20px;
+            text-align: center;
+        }
+        .products li img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
         }
         footer {
             background-color: #333;
@@ -90,18 +94,15 @@
 </head>
 <body>
     <header>
-        {% block body %}
-        <div>
-            <h1>Stevens Federal Credit Union</h1>
-            <ul class="bar">
-                <li><a href="/">HOME</a></li>
-                <li><a href="/dashboard">DASHBOARD</a></li>
-                <li><a href="/login">LOGIN</a></li>
-                <li><a href="/register">REGISTER</a></li>
-            </ul>
-        </div>
+        <h1>Stevens Federal Credit Union</h1>
+        <ul class="bar">
+            <li><a href="/">HOME</a></li>
+            <li><a href="/dashboard">DASHBOARD</a></li>
+            <li><a href="/login">LOGIN</a></li>
+            <li><a href="/register">REGISTER</a></li>
+        </ul>
     </header>
-        {% endblock %}
+    {% block content %}{% endblock %}
 
     <div class="headline">
         <h3>Welcome to</h3>
