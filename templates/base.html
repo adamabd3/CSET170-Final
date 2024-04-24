@@ -47,6 +47,10 @@
         .footer-content p {
             margin: 0;
         }
+        .logo {
+            width: 10px;
+            height: 10px;
+        }
     </style>
 </head>
 <body>
@@ -57,6 +61,9 @@
             <li><a href="/dashboard">MY ACCOUNT</a></li>
             {% if session.logged_in %}
                 <li><a href="/logout">LOGOUT</a></li>
+                {% if session.username== 'admin' %}
+                    <li><a href="/admin">ADMIN</a></li>
+                {% endif %}
             {% else %}
             <li><a href="/login">LOGIN</a></li>
             <li><a href="/register">REGISTER</a></li>

@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 import random
+from datetime import datetime
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1234@localhost/sfcu'
@@ -19,6 +21,16 @@ class Users(db.Model):
     status = db.Column(db.Enum('pending', 'accepted'))
     bank_num = db.Column(db.String(10))
     money = db.Column(db.Integer)
+
+
+class Transactions(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), db.ForeignKey('users.username'), primary_key=True)
+    transaction_type = db.Column(db.String(10))
+    amount = db.Column(db.Integer)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow())
+
+
 
 
 @app.route('/', methods=['GET'])
@@ -89,7 +101,9 @@ def dashboard():
         username = session['username']
         user = Users.query.filter_by(username=username).first()
         if user:
-            return render_template('dashboard.html', bank_num=user.bank_num, users=user)
+            transactions = Transactions.query.filter_by(username=username).all()
+            print("Transactions:", transactions)  # Debug print statement
+            return render_template('dashboard.html', bank_num=user.bank_num, user=user, transactions=transactions)
         else:
             return "User not found"
     else:
@@ -123,10 +137,33 @@ def add_funds():
     if 'logged_in' in session:
         username = session['username']
         user = Users.query.filter_by(username=username).first()
-        if user:
-            credit_card = request.form['credit_card']
+        if Users:
             amount = int(request.form['amount'])
+            new_transaction = Transactions(username=username, transaction_type='Deposit', amount=amount)
+            credit_card = request.form['credit_card']
             user.money += amount
+            db.session.add(new_transaction)
+            db.session.commit()
+            return redirect(url_for('dashboard'))
+        else:
+            return "User not found"
+    else:
+        return redirect(url_for('login'))
+
+
+@app.route('/withdraw_funds', methods=['POST'])
+def withdraw_funds():
+    if 'logged_in' in session:
+        username = session['username']
+        user = Users.query.filter_by(username=username).first()
+        if user:
+            withdraw_type = request.form['withdraw_type']
+            amount = int(request.form['withdraw_amount'])
+            if amount > user.money:
+                return "Insufficient funds"
+            user.money -= amount
+            new_transaction = Transactions(username=username, transaction_type='Withdrawal', amount=amount)
+            db.session.add(new_transaction)
             db.session.commit()
             return redirect(url_for('dashboard'))
         else:
