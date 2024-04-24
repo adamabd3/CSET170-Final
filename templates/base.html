@@ -54,9 +54,13 @@
         <h1>Stevens Federal Credit Union</h1>
         <ul class="bar">
             <li><a href="/">HOME</a></li>
-            <li><a href="/dashboard">DASHBOARD</a></li>
+            <li><a href="/dashboard">MY ACCOUNT</a></li>
+            {% if session.logged_in %}
+                <li><a href="/logout">LOGOUT</a></li>
+            {% else %}
             <li><a href="/login">LOGIN</a></li>
             <li><a href="/register">REGISTER</a></li>
+            {% endif %}
         </ul>
     </header>
     {% block content %}{% endblock %}

@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block content %}
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -112,17 +113,6 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>Stevens Federal Credit Union</h1>
-        <ul class="bar">
-            <li><a href="/">HOME</a></li>
-            <li><a href="/dashboard">DASHBOARD</a></li>
-            <li><a href="/login">LOGIN</a></li>
-            <li><a href="/register">REGISTER</a></li>
-        </ul>
-    </header>
-    {% block content %}{% endblock %}
-
     <div class="headline">
         <div class="left">
             <h3>Welcome to</h3>
@@ -151,12 +141,6 @@
             </li>
         </ul>
     </div>
-
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2024 Stevens Federal Credit Union. All rights reserved.</p>
-        </div>
-    </footer>
 </body>
 </html>
-
+{% endblock %}

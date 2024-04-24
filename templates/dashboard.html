@@ -1,24 +1,73 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container">
-    <a href="/statement">View Bank Statement</a>
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>Sender/Description</th>
-            <th>Recipient</th>
-            <th>Amount</th>
-            <th>Type</th>
-        </tr>
-        {% for transaction in transactions %}
-        <tr>
-            <td>{{ transaction.date }}</td>
-            <td>{{ transaction.sender }}</td>
-            <td>{{ transaction.recipient }}</td>
-            <td>{{ transaction.amount }}</td>
-            <td>{{ transaction.type }}</td>
-        </tr>
+<style>
+    .user-info, .account-balance, .add-funds-form {
+        max-width: 600px;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    label {
+        font-weight: bold;
+    }
+    input[type="text"], input[type="number"] {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    button[type="submit"] {
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    button[type="submit"]:hover {
+        background-color: #2980b9;
+    }
+</style>
+
+<div class="user-info">
+    <h2>User Information</h2>
+    <p><strong>Username:</strong> {{ users.username }}</p>
+    <p><strong>First Name:</strong> {{ users.firstname }}</p>
+    <p><strong>Last Name:</strong> {{ users.lastname }}</p>
+    <p><strong>SSN:</strong> {{ users.ssn }}</p>
+    <p><strong>Address:</strong> {{ users.address }}</p>
+    <p><strong>Phone Number:</strong> {{ users.phonenumber }}</p>
+</div>
+
+<div class="account-balance">
+    <h2>Account Balance</h2>
+    <p>Your current balance: ${{ users.money }}</p>
+    <h3>Transaction History</h3>
+    <ul>
+        {% for transaction in users.transaction_history %}
+            <li>{{ transaction.amount }} ({{ transaction.type }})</li>
         {% endfor %}
-    </table>
+    </ul>
+</div>
+
+<div class="add-funds-form">
+    <h2>Add Funds</h2>
+    <form action="{{ url_for('add_funds') }}" method="post">
+        <label for="credit_card">Credit Card Number:</label><br>
+        <input type="text" id="credit_card" name="credit_card" required><br>
+        <label for="expiry_date">Expiry Date (MM/YYYY):</label><br>
+        <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YYYY" required><br>
+        <label for="ccv">CCV:</label><br>
+        <input type="text" id="ccv" name="ccv" required><br>
+        <label for="amount">Amount to Add ($):</label><br>
+        <input type="number" id="amount" name="amount" min="1" required><br>
+        <button type="submit">Add Funds</button>
+    </form>
 </div>
 {% endblock %}

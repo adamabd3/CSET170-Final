@@ -8,9 +8,42 @@
         width: 1140px;
         margin: auto;
     }
+       table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid #ddd; /* Add border to the table */
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd; /* Add border to table cells */
+    }
+
+    th {
+        background-color: #f2f2f2; /* Light gray background for header */
+    }
+
+    tr:hover {
+        background-color: #f5f5f5; /* Highlight row on hover */
+    }
+
+    button[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 16px;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #45a049;
+    }
 </style>
     <div class="flex-box">
         <h3>Pending Accounts</h3>
+
         <table>
             <tr>
                 <th>Username</th>
@@ -21,7 +54,7 @@
                 <th>Phone Number</th>
                 <th>Action</th>
             </tr>
-            {% for users in pending_accounts %}
+            {% for users in pending %}
             <tr>
                 <td>{{ users.username }}</td>
                 <td>{{ users.firstname }}</td>
@@ -29,12 +62,14 @@
                 <td>{{ users.ssn }}</td>
                 <td>{{ users.address }}</td>
                 <td>{{ users.phonenumber }}</td>
-                <td><a href="/admin/accept/{{ users.username }}">Accept</a></td>
+                <td>
+                <form method="POST" action="{{ url_for('admin', username=users.username) }}">
+                    <button type="submit" name="accept" value="{{ users.username }}">Accept</button>
+                </form>
+                </td>
             </tr>
             {% endfor %}
         </table>
     </div>
 
-</body>
-</html>
 {% endblock %}
